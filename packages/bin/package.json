@@ -1,5 +1,5 @@
 {
-  "name": "sxb-app",
+  "name": "@sxb/bin",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,10 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "lerna": "^7.1.5",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {}
+  "license": "ISC"
 }

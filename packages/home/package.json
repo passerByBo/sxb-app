@@ -1,5 +1,5 @@
 {
-  "name": "sxb-app",
+  "name": "@sxb/home",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "lerna": "^7.1.5",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {}
+  "dependencies": {
+    "@sxb/components": "workspace:^",
+    "@sxb/hooks": "workspace:^",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
