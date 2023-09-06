@@ -1,0 +1,13 @@
+0 silly argv {
+0 silly argv   _: [ 'publish' ],
+0 silly argv   composed: 'publish',
+0 silly argv   lernaVersion: '7.1.5',
+0 silly argv   '$0': 'C:\\Program Files\\nodejs\\node_modules\\lerna\\dist\\cli.js'
+0 silly argv }
+1 notice cli v7.1.5
+2 verbose packageConfigs Explicit "packages" configuration found in lerna.json. Resolving packages using the configured glob(s): ["packages/*"]
+3 verbose rootPath D:\projects\react\sxb-app
+4 error Error: GenericFailure
+4 error     at D:\projects\react\sxb-app\node_modules\.pnpm\nx@16.7.4\node_modules\nx\src\project-graph\utils\retrieve-workspace-files.js:29:87
+4 error     at Generator.next (<anonymous>)
+4 error     at fulfilled (D:\projects\react\sxb-app\node_modules\.pnpm\tslib@2.6.2\node_modules\tslib\tslib.js:166:62)

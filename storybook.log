@@ -1,0 +1,31 @@
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 18, reused 10, downloaded 0, added 0
+Progress: resolved 57, reused 26, downloaded 0, added 0
+Progress: resolved 91, reused 45, downloaded 0, added 0
+Progress: resolved 108, reused 53, downloaded 0, added 0
+Progress: resolved 118, reused 53, downloaded 0, added 0
+Progress: resolved 142, reused 62, downloaded 0, added 0
+Progress: resolved 164, reused 72, downloaded 0, added 0
+Progress: resolved 206, reused 88, downloaded 0, added 0
+Progress: resolved 252, reused 131, downloaded 1, added 0
+Progress: resolved 363, reused 161, downloaded 1, added 0
+Progress: resolved 466, reused 181, downloaded 1, added 0
+Progress: resolved 581, reused 215, downloaded 1, added 0
+Progress: resolved 680, reused 259, downloaded 1, added 0
+Progress: resolved 800, reused 302, downloaded 1, added 0
+Progress: resolved 942, reused 551, downloaded 1, added 0
+ WARN  deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+ WARN  deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+ WARN  deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+Progress: resolved 1115, reused 823, downloaded 1, added 0
+Progress: resolved 1299, reused 1258, downloaded 1, added 0
+Packages: +358 -7
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+Progress: resolved 1314, reused 1273, downloaded 1, added 0
+Progress: resolved 1314, reused 1273, downloaded 1, added 38
+Progress: resolved 1314, reused 1273, downloaded 1, added 102
+ ERR_PNPM_LINKING_FAILED  Error: EPERM: operation not permitted, rename 'D:\projects\react\sxb-app\node_modules\.pnpm\style-loader@3.3.3_webpack@5.88.2\node_modules\style-loader_tmp_4328' -> 'D:\projects\react\sxb-app\node_modules\.pnpm\style-loader@3.3.3_webpack@5.88.2\node_modules\style-loader'
+Progress: resolved 1314, reused 1273, downloaded 1, added 164
+Progress: resolved 1314, reused 1273, downloaded 1, added 223
+Progress: resolved 1314, reused 1273, downloaded 1, added 307
+Progress: resolved 1314, reused 1273, downloaded 1, added 351

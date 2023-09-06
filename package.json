@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "lerna": "^7.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "7.4.0",
     "typescript": "^5.2.2"
-  },
-  "dependencies": {}
+  }
 }
