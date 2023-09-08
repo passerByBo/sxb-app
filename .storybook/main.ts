@@ -2,8 +2,8 @@ import type { StorybookConfig } from "@storybook/react-webpack5";
 
 const config: StorybookConfig = {
   stories: [
-    "../stories/**/*.mdx",
-    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../packages/components/stories/**/*.mdx",
+    "../packages/components/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
     "@storybook/addon-links",
@@ -11,13 +11,21 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
     {
-      name: 'storybook-addon-swc',
+      name: "storybook-addon-swc",
       options: {
         enable: true,
         enableSwcLoader: true,
         enableSwcMinify: true,
         swcLoaderOptions: {},
         swcMinifyOptions: {},
+      },
+    },
+    {
+      name: "@storybook/addon-postcss",
+      options: {
+        postcssLoaderOptions: {
+          implementation: require("postcss"),
+        },
       },
     },
   ],

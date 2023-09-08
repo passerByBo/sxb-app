@@ -1,6 +1,6 @@
 import React from 'react';
 import './button.css';
-
+import cn from 'classnames'
 interface ButtonProps {
   /**
    * Is this the principal call to action on the page? 每个属性的props的解释
@@ -38,7 +38,13 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={cn(
+        'px-10',
+        'w-[100px]',
+        '[nth-child]',
+        'bg-primary',
+        'text-red-100', 
+      )}
       style={{ backgroundColor }}
       {...props}
     >
