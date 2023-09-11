@@ -1,6 +1,6 @@
-import React from 'react';
-import './button.css';
-import cn from 'classnames'
+import React from "react";
+import "./button.css";
+import cn from "classnames";
 interface ButtonProps {
   /**
    * Is this the principal call to action on the page? 每个属性的props的解释
@@ -13,7 +13,7 @@ interface ButtonProps {
   /**
    * How large should the button be?
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   /**
    * Button contents
    */
@@ -29,25 +29,48 @@ interface ButtonProps {
  */
 export const Button = ({
   primary = false,
-  size = 'medium',
+  size = "medium",
   backgroundColor,
   label,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const mode = primary
+    ? "storybook-button--primary"
+    : "storybook-button--secondary";
+  console.log(size, mode);
+  const aaa = () => {
+    const a = "1";
+    console.log(a);
+  };
+
+  // const cc = { c: 1 };
+  // console.log(cc);
+
+  const aaaaa = {
+    a: 1,
+    b: 2,
+    c: 3,
+  };
+
+  console.log(aaaaa);
+
+  const bb = (v: string) => {
+    console.log(v);
+  };
+
+  console.log(aaa, bb);
   return (
     <button
       type="button"
       className={cn(
-        'px-10',
-        'w-[100px]',
-        '[nth-child]',
-        'bg-primary',
-        'text-red-100', 
+        "px-10",
+        "w-[100px]",
+        "[nth-child]",
+        "bg-primary",
+        "text-red-100",
       )}
       style={{ backgroundColor }}
-      {...props}
-    >
+      {...props}>
       {label}
     </button>
   );
