@@ -63,11 +63,11 @@ export const Button = ({
     <button
       type="button"
       className={cn(
-        "px-10",
-        "w-[100px]",
-        "[nth-child]",
         "bg-primary",
         "text-red-100",
+        "px-10",
+        "w-[100px]",
+        "bg-inherit",
       )}
       style={{
         backgroundColor,
