@@ -43,9 +43,9 @@ export const Button = ({
     console.log(a);
   };
 
-  // const cc = { c: 1 };
-  // console.log(cc);
-
+  const cc = { c: 1 };
+  console.log(cc);
+  console.log(cc);
   const aaaaa = {
     a: 1,
     b: 2,
