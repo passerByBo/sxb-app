@@ -30,5 +30,6 @@ module.exports = {
     "prettier/prettier": "error",
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
+    "linebreak-style": [0, "error", "window"],
   },
 };

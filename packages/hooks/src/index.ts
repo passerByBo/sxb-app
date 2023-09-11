@@ -1,2 +1,2 @@
-const name = "sxb"
-export default name
+const name = "sxb";
+export default name;
