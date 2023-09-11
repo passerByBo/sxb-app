@@ -43,7 +43,7 @@ export const Button = ({
     console.log(a);
   };
 
-  const cc = { c: 1 };
+  const cc = {c: 1};
   console.log(cc);
   console.log(cc);
   const aaaaa = {
@@ -69,7 +69,9 @@ export const Button = ({
         "bg-primary",
         "text-red-100",
       )}
-      style={{ backgroundColor }}
+      style={{
+        backgroundColor,
+      }}
       {...props}>
       {label}
     </button>
