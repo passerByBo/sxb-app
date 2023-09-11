@@ -8,8 +8,8 @@
     "build-storybook": "storybook build",
     "prepare": "husky install",
     "test": "echo husky test",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "eslint": "eslint packages/**/src/**/*.{ts,tsx}",
+    "eslint:fix": "yarn run eslint --fix",
     "prettier": "prettier --write ."
   },
   "keywords": [],
@@ -52,7 +52,8 @@
     "classnames": "^2.3.2"
   },
   "lint-staged": {
-    "*.js": "eslint --fix ",
-    "*.{js,css,md,html,json}": "prettier --cache --write"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
