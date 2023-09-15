@@ -9,7 +9,16 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    // 配置预览生效暗黑模式
+    darkMode: {
+      classTarget: 'body',
+      stylePreview: true
+    },
+    webpackFinal: (config) => {
+
+    }
   },
+ 
 };
 
 export default preview;

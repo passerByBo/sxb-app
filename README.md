@@ -1,10 +1,7 @@
 pwa
 aws
 
-
 lerna+pnpm配合使用
-
-
 
 lerna的作用：
 pnpm的作用：
@@ -68,12 +65,22 @@ experiments:{
 }
 
 webpack lazy compilation 关键字搜索
-
+webpack css  include 只有几个路径可以引入
 
 落地tailwindcss
 1.团队的classname 增加开发效率  熟悉tailwindcss
 2.移动端收益明显？
-3.
+
+
+tailwindcss handless 组件库  组件较少
+性能要求高可以使用，tob的项目 建议使用常规组件库 antd mui 推荐使用css in js 
+toc性能要求高使用tailwindcss
+
+css in js 库   vanilla-extract 0runtime   
+
+react-helment-async react组件中设置head的  SEO SSR中经常使用
+
+
 
 
 

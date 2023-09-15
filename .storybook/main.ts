@@ -28,6 +28,9 @@ const config: StorybookConfig = {
         },
       },
     },
+    "storybook-dark-mode",
+    "@storybook/addon-mdx-gfm",
+    "'@storybook/addon-jest'"
   ],
   framework: {
     name: "@storybook/react-webpack5",
@@ -35,6 +38,15 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
+  },
+   core: {
+    builder: {
+      name: '@storybook/builder-webpack5',
+      options: {
+        fsCache: true,
+        lazyCompilation: true,
+      },
+    },
   },
 };
 export default config;
