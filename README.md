@@ -80,6 +80,15 @@ css in js 库   vanilla-extract 0runtime
 
 react-helment-async react组件中设置head的  SEO SSR中经常使用
 
+chromatic 自动化cicd平台 github jencis 配合
+
+github actions
+
+storybook 提供的渲染方式 去渲染东西
+
+react-hook-form
+
+bit.dev 管理组件的工作流
 
 
 
