@@ -1,0 +1,277 @@
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+## 笔记
+
+### 路由
+
+- prefetch
+- Router Cache
+- Partial Rendering
+
+
+app-router 在app目录下，app-router的优先级高于page-router
+
+路由中的每个文件夹代表一个路由段，每个路由段映射到URL路径中的相应段
+
+嵌套路由=文件夹嵌套
+
+- layout
+- page
+- loading
+- node-found
+- error
+- global-error
+- route
+- template
+- default 
+
+如上这些文件夹不具备路由和嵌套路由的功能，全局的一些UI和行为
+
+在固定的路由段中定义的特殊文件将作用于当前层次的结构中
+
+任何段落中都可以自定义布局，该布局会作用于当前路由和所有的子路由当中
+
+使用Route Group 共享布局
+
+默认情况下Layout组件为服务端组件  也可以设置为客户端组件
+
+layout组件可以获取数据
+
+父子布局之间不可以共享数据，可以多次获取数据
+
+布局不能访问到子的路由段，要访问所有的路有段可以在客户端组件中使用
+
+嵌套路由中，子路由组件将嵌在父路由的组件中使用  useSelectedLayoutSegment or useSelectedLayoutSegments api获取
+
+jsx tsx js可以作为布局或者页面的扩展后缀
+
+layout.js 和  page.js 可以在文件夹中同时存在
+
+app目录下的文件 当子目录中包含page.js或者route.js 才会作为路由展示，其他的正常保存的components lib api等等只要子目录中不包含page和route就不会作为路由展示
+
+app下必须存在根路由的layout布局组件，该组件必须返回html，作为服务器返回的初始HTML
+
+template.js 在layout内 包裹page.js  三个层级关系 layout-template-page
+
+为解决seo优化问题  如果需要每个页面单独修改head属性  可以在layout或者page中 使用next提供的Metadata来修改Head  导出metadata即可
+
+页面之间的导航 <Link>组件， useRouter Hook
+
+usePathname() next/navigation 获取当前的链接
+
+Link组件支持锚点属性 链接自动滚动
+
+useRouter next/navigation 只能在客户端组件中使用
+
+客户端路由和服务端路由混用，在客户端上nextjs预取并缓存路由段，当当行到一个新的路由时浏览器不会刷新重新加载页面，只会加载新的路由片段 提高导航性能
+
+==预取==
+
+预取：在用户访问路由之前在后台预加载路由的一种方法，两种方式 第一种是\<link>组件当路由在用户viewport可见时会自动预取，预取在首次加载或者滚动进入视图时发生
+第二种方式是  router.prefetch useRouter hook可以使用编程的方式预取路由
+
+静态路由和动态路由预取的方式不同，静态路由预取默认为真整个路由预取和缓存。动态路由预取方式默认为自动，只预取共享布局直到第一个loading.js 文件被缓存30s，降低了整个动态路由的成本，意味着可以显示及时加载状态展现更好的视觉反馈
+
+可以设置prefetch为false 禁止预取
+
+nextjs有一个 in-memory client-side cache  RouterCache  当用户在应用程序中导航时，预取路由段和访问路由的React Server Component Payload 缓存在内存中，导航的时候尽可能重用缓存而不是通过减少请求数量或者向服务器发出新的请求
+
+局部渲染：客户端重新渲染导航时更改的路由段，保留共享和布局的部分
+
+嵌套路由一般映射为URL，可以将文件夹标记为路由组避免这种映射关系，通过将文件夹名称包含在括号中创建，可以创建多个根路由根据分组创建每个根布局都需要携带html、body，防止多个分组内重复定义路由段
+
+动态路由： 可以传递给layou、page、route和generateMetadata函数，动态路由段使用[]包裹，文件夹定义的时候也是使用 []包裹
+generateStaticParams 可以在构建时动态生成路由而不是请求时生成。该函数可以智能检索数据，如果在函数内获取数据，会缓存记住这些请求，夸多个generateStaticParams函数布局和页面具有相同的参数获取请求只会发起一次
+
+使用\[...slug] 会匹配到包含子所有的路径
+可选段\[\[...slug]]  可以匹配到不带子路径的URL，其他的和全匹配动态路由类似
+
+
+#### 预加载
+loading可以加载部分UI如封面图、标题等，loading使用react suspense API，loading和layout在同一级目录下，会自动将pagejs包裹在suspense组件中
+除了loadingjs之外可以手动给组件创建Suspense 支持组件流式传输
+
+next SSR工作流程
+1、 首先在服务器上获取页面的所有数据
+2、服务器端生成HTML
+3、页面的html、css、js通过服务端传输到客户端
+4、html、css生成非交互式界面
+5、最后使用React hydrates给界面增加交互
+
+整个流程是连续的也是阻塞的，服务器上获取所有数据之后才能呈现页面html，客户端上当所有的组件代码被下载之后才能对UI进行补充
+需要从服务器上获取到所有的数据以后才会响应到客户端html，可以使用流式传输 streaming 将组件块分批发送到客户端，将部分页面预先呈现。
+组件在流的工作模式中非常契合，可以将搞优先级的组件先返回或者不依赖数据的组件先返回，react可以更早的开始hydrates（水合），优先级脚底的组件可以在回去数据后在同一个服务器请求中发送
+
+数据量过大 streaming 可以 减少首字节（TTFB） 首次大元素绘制（FCP）  提高首次交互时间（TTI），尤其在低端设备上
+
+\<Suspense> 包装执行异步操作的组件，操作开始时显示loading或者其他的骨架屏，操作完成之后替换主要组件
+使用<Suspense> 的好处
+1. Streaming Server Rendering 分段将html渲染到客户端
+2. Selective Hydration 选择性水合，根据用户交互考虑那些组件进行优先交互
+
+
+#### SEO
+nextjs等待generateMetadata 内的数据获取完成，然后将UI流式传输到客户端，保证了流式响应的第一部分包含head标签和内部的一些其他信息
+可以使用google王 测试工具来查看爬虫获取当前页面的一些信息是否友好
+
+流式传输过程重定向和404不会影响到 整体的SEO
+
+#### 错误处理
+js文件约定允许使用error.js返回错误信息
+- 自动将错误信息包装在路有段和嵌套子路由
+- 使用文件系统层次结构中创建合适的错误UI
+- 将错误隔离到受影响的段，保持应用程序其余部分正常运行
+- 添加功能，尝试在不重新加载整个页面的情况下恢复错误
+
+Error组件的props包含了error和reset， 调用reset可以重新加载
+
+- error.js 组件自动创建一个 React Error Boundary 包裹嵌套的子路由段或者是pagejs
+- errorjs导出的组件作为后备展示的组件
+- 如果在当前errorjs错误边界内触发的错误，则展示错误组件回退
+- 当页面显示错误组件，错误组件可以从错误中恢复
+
+错误组件调用reset函数恢复错误，如果成功则会回退错误组件显示正常的组件
+
+- 错误会冒泡到最近的父组件，设置不同层级的errorjs可以切分不同粒度的错误响应
+- errorjs错误边界不包含当前层级layout组件抛出的错误，因为errorjs包裹在layout组件中
+
+errorjs不会捕获layout和template中抛出的错误，这种层次结构可以在兄弟组件之间共享UI结构
+要处理特定布局和模板中的错误，可以将errorjs放到layout父路由段中，要处理根布局和模板中的错误可以使用global-errorjs处理
+global-errorjs定义在根app.js下，错误边界包含整个应用程序，需要包含html body标记
+建议根组件中定义一个全局的错误处理界面，一般不会触发
+
+如果服务器抛出一个错误，nextjs会讲错误对象转发到就近的errorjs响应错误
+
+再生产环境，转发到客户端的Error对象一般仅包含消息和摘要属性，避免将敏感信息泄露到客户端，开发期间转发到客户端的Error对象将被序列化并包含原始错误信息
+
+#### 并行路由
+并行路由允许同时展示同一布局中的一个多个页面，对于应用程序中高度动态的部分，可以使用并行路由实现复杂的路由模式（指示版和社交提醒）
+并行路由允许为每个路由定义独立的错误和加载状态，因为他们是独立进行流传输的
+并行路由允许基于某些条件呈现不同的slot，可以将同一URL上的代码完全隔离
+并行路由使用具名插槽实现，插槽通过@文件夹名称约定定义，公企鹅作为props传递给同级别的布局layout
+插槽不是路有段，也不影响URL结构，文件路径@team/member 可以在/member访问
+``` tsx
+export default function Layout(props: {
+  children: React.ReactNode
+  analytics: React.ReactNode
+  team: React.ReactNode
+}) {
+  return (
+    <>
+      {props.children}
+      {props.team}
+      {props.analytics}
+    </>
+  )
+}
+```
+可以定义一个default文件，当nextjs无法根据URL恢复插槽的活动状态可以将default导出的组件作为备份呈现
+
+UseSelectedLayoutSegment 和 useSelectedLayoutSegments 都接受一个 allelRoutesKey，它允许您读取该插槽中的活动路由段。
+
+```tsx
+'use client'
+ 
+import { useSelectedLayoutSegment } from 'next/navigation'
+ 
+export default async function Layout(props: {
+  //...
+  auth: React.ReactNode
+}) {
+  const loginSegments = useSelectedLayoutSegment('auth')
+  // ...
+}
+
+```
+
+#### 拦截路由
+当路由切换不需要用户切换到不同的上下文  就可以使用拦截路由的功能
+
+可以使用(..)拦截路由，这与相对路径类似，但是作用于路由段
+- (.) 拦截当前级别路由段
+- (..) 拦截上一级路由段
+- (..)(..)拦截上两级路由段
+- (...) 匹配根路由段
+如上是基于路由段的而不是文件路径
+
+
+#### 路由处理程序
+Route Handlers 允许web请求和响应 api为给定路由，创建自定义请求处理程序
+RootHandler只能在app目录中使用
+
+
+#### 中间件
+middleware.js 自定义中间件生效的URL
+``` tsx
+export const config = {
+  matcher: ['/about/:path*', '/dashboard/:path*'],
+}
+```
+
+
+## 数据获取、缓存
+
+
+## 渲染
+react server组件允许在服务武器上呈现和缓存的UI，支持流式渲染和部分渲染
+
+- static Rendering
+- Dynamic Rendering
+- Streaming
+
+
+#### 服务器渲染的好处
+- 数据获取：服务器组件允许数据获取在服务器上进行，更接近数据源，减少数据获取的时间以及减少客户端发出的请求数量
+- 安全性：服务器组件允许在服务器上保存敏感数据和逻辑，它并不会暴露给客户机
+- 缓存：结果可以在后续的请求和跨用户缓存和重用，减少每个请求的数据量来提供性能
+- 服务器端组件允许保留较大的依赖包，这些依赖包不需要下载在服务器端运行
+- 初始页面还在和第一个有内容的绘制可以在服务器上生成html，允许用户立即查看到页面儿不必要解析和渲染页面所需的javascript
+- 搜索引擎优化
+- 流：服务器组件允许将UI分割，部分渲染完成就可以直接传输到浏览器，可以分批渲染
+
+
+服务段渲染分为三种
+1. 静态渲染 - 渲染静态HTML
+2. 动态渲染 - 动态获取数据渲染
+3. 流式渲染 - 最简单的就是loading和page的渲染 就是使用的流式
+
+#### 客户端渲染的好处
+- 交互性：客户端组件可以使用state、effect和事件监听，可以给用户实时反馈
+- 浏览器API
+
+组件头部增加‘use client’ 标识为客户端组件，导入到该组件中的其他文件和组件也会被认为是客户端组件的一部分
+
+可以多定义几个use client 分割客户端包
+
+客户端组件 在服务器返回的时候第一次将在服务器端完成渲染，不必登客户端下载和执行客户端组件渲染
+
+服务器端
+1. 服务器端咋进RSC Payload其中包含对客户端组件的引用
+2. 使用RSC 和客户端组件完成服务器上的路由HTML生成
+客户端
+1. html英语立即显示路由但是不可交互
+2. RSC Payload用于协调客户端和服务武器组件树 并更新DOM
+3. javascript补充客户端组件UI的交互性
+
+hydrate 将时间监听器加到dom上，使静态HTML具备交互性
+
+在随后的导航中，客户端组件完全在客户端上运行，没有服务器端返回html，这意味着客户端组件javascript被下载并解析，一旦下载的包准备就系，reactr将使用RSC有效协调客户端和服务器端组件树，并更新DOM
+
+
+
+
+
+
+
